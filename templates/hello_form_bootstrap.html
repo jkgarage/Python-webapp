@@ -1,0 +1,39 @@
+{% extends "master_layout.html" %}
+{% block content %}
+ 
+ 
+  <h2>Flask Web Form - Respond to name </h2>
+  <form  action="" method="post" role="form">
+    {{ form.csrf }}
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input class="form-control" id="id_name" name="name" placeholder="What's your name ?"></input>
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+ 
+  <br>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+ 
+        {% for message in messages %}
+            {% if "Error" not in message[1]: %}
+                <div class="alert alert-info">
+                <strong>Success! </strong> {{ message[1] }}
+                </div>
+            {% endif %}
+ 
+            {% if "Error" in message[1]: %}
+                <div class="alert alert-warning">
+                {{ message[1] }}
+                </div>
+            {% endif %}
+        {% endfor %}
+            {% endif %}
+        {% endwith %}
+ 
+</div>
+<br>      
+</div>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+.table-striped > thead > tr {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #ffd375;
+}
+
+/*
+ * Create dark grey header with a white logo
+ */
+  
+header {
+  vertical-align: middle;
+}
+
+.navbar-header .brandname {
+  font-size: 30px;
+  color: #0057e7;
+  padding: 10px 10px 10px 10px;
+  font-family: 'Faster One', cursive;
+}
+
+.navbar-header .brandname:hover,
+.navbar-header .brandname:focus {
+  text-decoration: none;
+}
+
+
+header h1.logo {
+  margin: 0;
+  font-size: 1.7em;
+  color: #eee;
+  text-transform: uppercase;
+  float: left;
+}
+ 
+header h1.logo:hover {
+  color: #fff;
+  text-decoration: none;
+}
+ 
+div.jumbo {
+  padding: 10px 0 30px 0;
+  background-color: #eeeeee;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}

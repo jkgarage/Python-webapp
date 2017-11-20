@@ -1,0 +1,55 @@
+{% extends "master_layout.html" %}
+{% block content %}
+
+      <link rel="stylesheet" href ="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
+ 
+      <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+      <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+      <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+ 
+  <h2>Word frequency analysis</h2>
+  
+  <p>This is an analysis tool for measuring word frequency of your input paragraph. The tool works with both Roman text and Chinese, Korean, Japanese. </p>
+  <p>Let <a href='mailto:jingkee@gmail.com'>me</a> know if you want to suggest other languages.</p>
+  
+  <form  action="" method="post" role="form">
+    {{ form.csrf }}
+    <div class="form-group">
+      <label for="name">Paragraph:</label>
+      <textarea class="form-control" id="id_paragraph" name="paragraph" placeholder="Enter your paragraph.." rows="5"></textarea>
+    </div>
+    <button type="submit" class="btn btn-success">Analyze</button>
+  </form>
+ 
+  <br>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+ 
+        {% for message in messages %}
+            {% if not error %}
+                <div class="alert alert-info">Analysis result:</div>
+                <div>
+                  <strong>{{ message[1] }}</strong>
+                </div>
+
+                {% if result_table %}
+                   {{ result_table|safe }}
+                {% endif %}
+            {% endif %}
+ 
+            {% if "Error" in message[1]: %}
+                <div class="alert alert-warning">
+                {{ message[1] }}
+                </div>
+            {% endif %}
+        {% endfor %}
+            {% endif %}
+        {% endwith %}
+ 
+  <script type="text/javascript">
+    $(document).ready(function() {
+        $('#result_table').DataTable();
+    } );
+  </script>
+
+{% endblock %}
