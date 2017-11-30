@@ -1,0 +1,46 @@
+{% extends "master_layout.html" %}
+{% block content %}
+ 
+  <h2>Contact me</h2>
+  <form  action="" method="post" role="form">
+    {{ form.csrf }}
+    <div class="form-group">
+      <label for="name">Carplate number *:</label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="At least first 4 digits of the carplate">
+      <br>
+      <label for="Foreground color">Email *:</label>
+      <input type="text" class="form-control" id="email" name="email" placeholder="Your email will be used to contact you.">
+      <br>
+      <label for="comment">Your message *:</label>
+      <input type="text" class="form-control" id="comment" name="comment" placeholder="Enter your message.">
+ 
+ 
+    </div>
+    <button type="submit" class="btn btn-success">Contact</button>
+  </form>
+ 
+  <br>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+ 
+        {% for message in messages %}
+            {% if "Error" not in message[1]: %}
+                <div class="alert alert-info">
+                <strong>Success! </strong> {{ message[1] }}
+                </div>
+            {% endif %}
+ 
+            {% if "Error" in message[1]: %}
+                <div class="alert alert-warning">
+                {{ message[1] }}
+                </div>
+            {% endif %}
+        {% endfor %}
+            {% endif %}
+        {% endwith %}
+ 
+</div>
+<br>            
+</div>
+
+{% endblock %}

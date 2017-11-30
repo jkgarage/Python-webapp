@@ -1,0 +1,100 @@
+{% extends "master_layout.html" %}
+{% block content %}
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+      <script src="http://code.jquery.com/jquery-1.12.4.min.js"
+       integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+       crossorigin="anonymous"></script>
+      <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+      <script src="static/js/bootstrap.min.js"></script>
+      <script src="static/js/app.js"></script>
+      <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip(); 
+        });
+      </script>
+ 
+      <script src="https://d3js.org/d3.v3.min.js"></script>
+  <style>
+  body {
+      position: relative; 
+  }
+  </style>
+
+  <div data-spy="scroll">
+
+  <h2>Chinese HSK aid</h2>
+  
+  <p>This is a tool to aid reading Chinese by highlighting characters / words learnt in HSK. </p>
+  <p>Let <a href="{{ url_for('contactme') }}">me</a> if you want to suggest features.</p>
+  
+  <form action="#result" method="post" role="form">
+    {{ form.csrf }}
+    <div class="form-group">
+      <label for="name">Paragraph:</label>
+      <textarea class="form-control" id="id_paragraph" name="paragraph" placeholder="Enter your paragraph.." rows="5"></textarea>
+    </div>
+    <button type="submit" class="btn btn-success" id="id_analyze_btn">Analyze</button>
+  </form>
+ 
+  <br>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div id="result">
+            {% for message in messages %}
+                {% if not error %}
+                    <div class="alert alert-info">Analysis result:</div>
+                    <div>
+                      <h3>Original text</h3>
+                      <strong>{{ message[1] }}</strong>
+                    </div>
+
+
+                    <div class="text_highlight_display">
+                        {% if hsk_format %}
+                        <p>
+                          <ul class="list-inline">
+                            <li><span class={{hsk_format['1']}}>HSK 1</span></li>
+                            <li><span class={{hsk_format['2']}}>HSK 2</span></li>
+                            <li><span class={{hsk_format['3']}}>HSK 3</span></li>
+                            <li><span class={{hsk_format['4']}}>HSK 4</span></li>
+                            <li><span class={{hsk_format['5']}}>HSK 5</span></li>
+                            <li><span class={{hsk_format['6']}}>HSK 6</span></li>
+                          </ul>
+                        </p>
+                        {% endif %}
+
+                        {% if processed_text %}
+                          <h3>Highlighted text</h3>
+                          <p>{{ processed_text|safe }}</p>
+                        {% endif %}
+
+                        {% if result_json %}
+                          <h3>Statistics</h3>
+                          <table id="hsk_stats_table" class="display" width="100%"></table>
+
+                          <svg id="visualisation" width="400" height="400"></svg>
+
+                          <script type="text/javascript">
+                            var dataSet = {{ result_json|safe }};
+                            $(document).ready(loadHSKTable("hsk_stats_table", dataSet));
+
+                            setupBarChart( convertDictToD3Format(dataSet) );
+                          </script>
+                        {% endif %}
+                    </div>
+                {% endif %}
+     
+                {% if "Error" in message[1]: %}
+                    <div class="alert alert-warning">
+                    {{ message[1] }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+            </div>
+
+            {% endif %}
+        {% endwith %}
+    </div>
+
+{% endblock %}

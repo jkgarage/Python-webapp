@@ -1,0 +1,83 @@
+{% extends "master_layout.html" %}
+{% block content %}
+  <h2>Carplate check</h2>
+
+  <form action="#result" method="post" role="form">
+    {{ form.csrf }}
+    <div class="form-group">
+      <label for="number">Number *:</label>
+      <input type="text" class="form-control" id="number" name="number" maxlength="15" minlength="2" placeholder="At least first 4 digits of plate (max 15)..">
+      <br>
+      <label for="fg_color">Text color *:</label>
+        <fieldset>
+          <input checked id="fg_color-1" type="radio" value="black" name="fg_color">
+          <label class="black" for="black">Black&nbsp;</label>
+          <br>
+          <input id="fg_color-2" type="radio" value="white" name="fg_color">
+          <label class="white" for="white">White&nbsp;</label>
+        </fieldset>
+      <br>
+      <label for="bg_color">Plate color *:</label>
+        <fieldset>
+          <input checked id="fg_color-5" type="radio" value="white" name="bg_color">
+          <label class="white" for="white">White&nbsp;</label>
+          <br>
+          <input id="fg_color-1" type="radio" value="blue" name="bg_color">
+          <label class="blue" for="blue">Blue&nbsp;&nbsp;</label>
+          <br>
+          <input id="fg_color-2" type="radio" value="black" name="bg_color">
+          <label class="black" for="black">Black&nbsp;</label>
+          <br>
+          <input id="fg_color-3" type="radio" value="red" name="bg_color">
+          <label class="red" for="red">Red&nbsp;&nbsp;&nbsp;</label>
+          <br>
+          <input id="fg_color-4" type="radio" value="yellow" name="bg_color">
+          <label class="yellow" for="yellow">Yellow</label>
+        </fieldset>
+      
+    </div>
+    <button type="submit" class="btn btn-success">Check</button>
+  </form>
+
+  <br>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+ 
+        {% for message in messages %}
+            {% if "Error" not in message[1]: %}
+                <div class="alert alert-info" id="result">
+                  <strong>Heyder! </strong> {{ message[1] }}
+                </div>
+                {% if carplate: %}
+                  <div class="carplate bg-{{ carplate.bg_color }}">
+                    <p class="number text-{{ carplate.fg_color }}">
+                        {{ carplate.number[:11] }}<br>
+                        {{ carplate.number[11:] }}
+                    </p>
+                  </div>
+                  <div class="veh-type-visual {{ carplate.vehicle_type[1] }}-vehicle"></div>
+                  <div align="center">
+                    <h2><span class="label label-primary">{{ carplate.location }}</span></h2>
+
+                    <iframe class="map" src="https://www.google.com/maps/embed/v1/place?q={{ carplate.location }}
+                    &zoom=5&center=17.30478552,107.1967488
+                    &key=<my_secret_key>">
+                    </iframe>
+                  </div>
+                {% endif %}
+            {% endif %}
+ 
+            {% if "Error" in message[1]: %}
+                <div class="alert alert-warning">
+                {{ message[1] }}
+                </div>
+            {% endif %}
+        {% endfor %}
+            {% endif %}
+        {% endwith %}
+ 
+</div>
+<br>            
+</div>
+
+{% endblock %}

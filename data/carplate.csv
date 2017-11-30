@@ -1,0 +1,156 @@
+Country,Số,Tỉnh/thành phố/Don vi
+VN,10,Dự trữ
+VN,11,Cao Bằng
+VN,12,Lạng Sơn
+VN,13,Bắc Giang/Bắc Ninh
+VN,14,Quảng Ninh
+VN,15,TP Hải Phòng
+VN,16,TP Hải Phòng
+VN,17,Thái Bình
+VN,18,Nam Định
+VN,19,Phú Thọ
+VN,20,Thái Nguyên
+VN,21,Yên Bái
+VN,22,Tuyên Quang
+VN,23,Hà Giang
+VN,24,Lào Cai
+VN,25,Lai Châu
+VN,26,Sơn La
+VN,27,Điện Biên
+VN,28,Hòa Bình
+VN,29,TP Hà Nội
+VN,30,TP Hà Nội
+VN,31,TP Hà Nội
+VN,32,TP Hà Nội
+VN,33,TP Hà Nội
+VN,34,Hải Dương
+VN,35,Ninh Bình
+VN,36,Thanh Hóa
+VN,37,Nghệ An
+VN,38,Hà Tĩnh
+VN,39,Đồng Nai
+VN,40,TP Hà Nội
+VN,41,TP Hồ Chí Minh
+VN,42,Dự trữ
+VN,43,TP Đà Nẵng
+VN,44,Dự trữ
+VN,45,Dự trữ
+VN,46,Dự trữ
+VN,47,Đắk Lắk
+VN,48,Đắk Nông
+VN,49,Lâm Đồng
+VN,50,TP Hồ Chí Minh
+VN,51,TP Hồ Chí Minh
+VN,52,TP Hồ Chí Minh
+VN,53,TP Hồ Chí Minh
+VN,54,TP Hồ Chí Minh
+VN,55,TP Hồ Chí Minh
+VN,56,TP Hồ Chí Minh
+VN,57,TP Hồ Chí Minh
+VN,58,TP Hồ Chí Minh
+VN,59,TP Hồ Chí Minh
+VN,60,Đồng Nai
+VN,61,Bình Dương
+VN,62,Long An
+VN,63,Tiền Giang
+VN,64,Vĩnh Long
+VN,65,TP Cần Thơ
+VN,66,Đồng Tháp
+VN,67,An Giang
+VN,68,Kiên Giang
+VN,69,Cà Mau
+VN,70,Tây Ninh
+VN,71,Bến Tre
+VN,72,Bà Rịa–Vũng Tàu
+VN,73,Quảng Bình
+VN,74,Quảng Trị
+VN,75,Thừa Thiên–Huế
+VN,76,Quảng Ngãi
+VN,77,Bình Định
+VN,78,Phú Yên
+VN,79,Khánh Hòa
+VN,80,Các cơ quan Trung ương
+VN,81,Gia Lai
+VN,82,Kon Tum
+VN,83,Sóc Trăng
+VN,84,Trà Vinh
+VN,85,Ninh Thuận
+VN,86,Bình Thuận
+VN,87,Dự trữ
+VN,88,Vĩnh Phúc
+VN,89,Hưng Yên
+VN,90,Hà Nam
+VN,91,Dự trữ
+VN,92,Quảng Nam
+VN,93,Bình Phước
+VN,94,Bạc Liêu
+VN,95,Hậu Giang
+VN,96,Dự trữ
+VN,97,Bắc Kạn
+VN,98,Bắc Giang
+VN,99,Bắc Ninh
+VN,TM,Bộ Tổng Tham mưu - Cơ quan Bộ Quốc phòng
+VN,TC,Tổng cục Chính trị
+VN,TH,Tổng cục Hậu cần
+VN,TT,Tổng cục Kỹ thuật
+VN,TK,Tổng cục Công nghiệp Quốc phòng
+VN,TN,Tổng cục II
+VN,KA,Quân khu 1
+VN,KB,Quân khu 2
+VN,KC,Quân khu 3
+VN,KD,Quân khu 4
+VN,KV,Quân khu 5
+VN,KP,Quân khu 7
+VN,KK,Quân khu 9
+VN,KT,Bộ Tư lệnh Thủ đô Hà Nội
+VN,QA,Quân chủng Phòng không - Không quân
+VN,QH,Quân chủng Hải quân
+VN,QB,Bộ Tư lệnh Bộ đội Biên phòng
+VN,AA,Quân đoàn 1
+VN,AB,Quân đoàn 2
+VN,AC,Quân đoàn 3
+VN,AD,Quân đoàn 4
+VN,BP,Binh chủng Pháo binh
+VN,BB,Binh chủng Tăng-Thiết giáp
+VN,BK,Binh chủng Đặc công
+VN,BT,Binh chủng Thông tin liên lạc
+VN,BC,Binh chủng Công binh
+VN,BH,Binh chủng Hoá học
+VN,BS,Bộ Tư lệnh Cảnh sát biển
+VN,BL,Bộ Tư lệnh Bảo vệ Lăng Chủ tịch Hồ Chí Minh
+VN,HA,Học viện Quốc phòng
+VN,HB,Học viện Lục quân
+VN,HC,Học viện Chính trị
+VN,HE,Học viện Hậu cần
+VN,HD,Học viện Kỹ thuật Quân sự
+VN,HH,Học viện Quân y
+VN,HT,Trường Sĩ quan Lục quân 1
+VN,HQ,Trường Sĩ quan Lục quân 2
+VN,HN,Trường Sĩ quan Chính trị
+VN,PK,Ban Cơ yếu Chính phủ
+VN,PA,Cục Đối ngoại
+VN,PY,Cục Quân y
+VN,PQ,Viện Khoa học và Công nghệ quân sự
+VN,PL,Viên Lịch sử quân sự Việt Nam
+VN,PX,Trung tâm Nhiệt đới Việt - Nga
+VN,PG,Trung tâm Gìn giữ hòa bình Việt Nam
+VN,PP-10,Bệnh viện Trung ương quân đội 108
+VN,PP-40,Bệnh viện quân y 175
+VN,PP-60,Viện Y học Cổ truyền quân đội
+VN,AP,Lữ đoàn 144
+VN,AV,Binh đoàn 11
+VN,AT,Binh đoàn 12
+VN,AN,Binh đoàn 15
+VN,AX,Binh đoàn 16
+VN,VB,Binh đoàn 18
+VN,VT,Tập đoàn Viễn thông quân đội
+VN,PM,Viện thiết kế Bộ Quốc phòng
+VN,DB,Tổng công ty Đông Bắc
+VN,ND,Tổng công ty Đầu tư phát triển Nhà và Đô thị Bộ Quốc phòng
+VN,CB,Ngân hàng Thương mại cổ phần quân đội
+VN,CA,Tổng công ty 36
+VN,CP,Tổng công ty 319
+VN,CM,Tổng công ty Thái sơn
+VN,CV,Tổng công ty Xây dựng Lũng Lô
+VN,CC,Tổng công ty Xăng dầu quân đội
+VN,CT,Công ty ứng dụng Kỹ thuật và Sản xuất

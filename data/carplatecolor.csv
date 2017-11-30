@@ -1,0 +1,7 @@
+Country,Fg color,Bg color,Vehicle type,Code
+VN,black,white,Personal and Business vehicle,personal
+VN,white,blue,Government vehicle,government
+VN,white,red,Military vehicle,military
+VN,white,yellow,Border military vehicle,military-border
+VN,black,yellow,Construction vehicle,construction
+VN,red,yellow,Special Economy vehicle,economy

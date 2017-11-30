@@ -46,3 +46,121 @@ div.jumbo {
      -moz-border-radius: 6px;
           border-radius: 6px;
 }
+
+.text-white {
+  color: #fff;
+}
+
+.text_highlight_display mark {
+  text-decoration: none;
+  background-color: transparent;
+}
+
+/*
+* Format for inline highlight of HSK vocabulary
+*/
+.text_highlight_display span {
+  padding: 2px 2px;
+  margin: 1px 1px;
+  border-radius: 4px;
+}
+
+.text_highlight_display .hsk1 {
+  background-color: #ffb3ba;
+}
+
+.text_highlight_display .hsk2 {
+  background-color: #ffdfba;
+}
+
+.text_highlight_display .hsk3 {
+  background-color: #ffccff;
+}
+
+.text_highlight_display .hsk4 {
+  background-color: #baffc9;
+}
+
+.text_highlight_display .hsk5 {
+  background-color: #bae1ff;
+}
+
+.text_highlight_display .hsk6 {
+  background-color: #d8d8d8;
+}
+
+.text_highlight_display p {
+  font-size: 30px;
+}
+
+
+/*
+*   Format for car plate checking
+*/
+fieldset label {
+  padding-right:5px;
+  border-style: solid;
+  border-width: 0px 20px 0px 0px;
+  font-family: "Courier";
+}
+
+fieldset .blue { border-color: blue; }
+fieldset .red { border-color: red; }
+fieldset .black { border-color: black; }
+fieldset .yellow { border-color: yellow; }
+fieldset .white { border-color: #FFFFF0; }
+
+.carplate {
+  border: 15px double lightgrey;
+  text-transform: uppercase;
+  box-shadow: black 3px 2px 3px;
+  border-radius: 30px;
+  
+  padding-top: 3px;
+  font-family: helvetica; 
+  font-weight: 300;
+
+  height: 200px;
+  width: 300px;
+  margin: 20px auto;
+}
+
+.number {
+  font-size: 35px;
+  text-align: center;
+  text-shadow: black 3px 2px 3px;
+  transform: scale(1.2,2.5); 
+  margin-top: 60px;
+}
+
+.bg-blue { background: blue; }
+.bg-white { background: #FFFFF0; }
+.bg-yellow { background: yellow; }
+.bg-red { background: red; }
+
+.text-white { color: white; }
+.text-black { color: black; }
+
+.veh-type-visual {
+  background-repeat: no-repeat;
+  background-size: 100px 100px;
+  height: 100px;
+  width: 100px;
+  margin: 5px auto;
+}
+
+.government-vehicle { background-image: url("../img/gov_icon.png"); }
+.personal-vehicle { background-image: url("../img/personal_veh_icon.png"); }
+.military-vehicle { background-image: url("../img/military_veh_icon.png"); }
+.construction-vehicle { 
+  background-image: url("../img/construction_veh_icon.png"); 
+}
+.military-border-vehicle {
+  background-image: url("../img/military_veh_icon.png");
+}
+.undefined-vehicle { background-image: url("../img/question-mark_icon.png"); }
+
+.map {
+    height: 450px;
+    width: 300px;
+  }
