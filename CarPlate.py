@@ -1,4 +1,5 @@
 # This Python file uses the following encoding: utf-8
+from google.appengine.api import memcache
 import json, re, sys
 
 carplate_color_mapping = {}
@@ -53,8 +54,17 @@ def load_carplate_color_mapping():
   return carplate_list
 
 
-carplate_mapping = load_carplate_number_mapping()
-carplate_color_mapping = load_carplate_color_mapping()
+if memcache.get('CARPLATE_MAPPING'):
+  carplate_mapping = memcache.get('CARPLATE_MAPPING')
+else:
+  carplate_mapping = load_carplate_number_mapping()
+  memcache.set('CARPLATE_MAPPING', carplate_mapping)
+
+if memcache.get('CAPLATE_COLOR_MAPPING'):
+  carplate_color_mapping = memcache.get('CAPLATE_COLOR_MAPPING')
+else:
+  carplate_color_mapping = load_carplate_color_mapping()
+  memcache.set('CAPLATE_COLOR_MAPPING', carplate_color_mapping)
 
 
 def get_location(number):

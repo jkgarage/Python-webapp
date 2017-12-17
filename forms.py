@@ -11,8 +11,8 @@ class ContactForm(Form):
 
 
 class ParagraphForm(Form):
-  # TODO(jk): impose a length limit
-  paragraph = TextAreaField('Paragraph:', validators=[validators.required() ])
+  paragraph = TextAreaField('Paragraph:', validators=[validators.required(),
+    validators.Length(max=16000) ])
 
 
 class PhotoForm(FlaskForm):

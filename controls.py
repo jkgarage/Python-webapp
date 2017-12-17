@@ -1,6 +1,13 @@
 # This Python file uses the following encoding: utf-8
-import json, re, sys
+from operator import itemgetter
+import json, re, sys, logging
 import config
+from google.appengine.api import memcache
+from google.appengine.ext import ndb
+from datetime import datetime, timedelta
+from models import HskText
+
+logging.basicConfig(filename='app.log', level=logging.DEBUG)
 
 hsk_breakdown = []
 
@@ -28,7 +35,11 @@ def load_HSK_vocabulary():
     return hsk_list
 
 
-HSK_VOCABULARY = load_HSK_vocabulary()
+if memcache.get('HSK_VOCABULARY'):
+    HSK_VOCABULARY = memcache.get('HSK_VOCABULARY')
+else:
+    HSK_VOCABULARY = load_HSK_vocabulary()
+    memcache.set('HSK_VOCABULARY', HSK_VOCABULARY)
 
 
 def analyse_sentence_into_hsk(utf8_sentence):
@@ -42,7 +53,7 @@ def analyse_sentence_into_hsk(utf8_sentence):
           hanyu pinyin.
           If the word does not belong in HSK vocabulary, HSK level and hanyu
           pinyin are both captured as None.
-          Example: [('还','3','huán'), ('终',None,None)]
+          Example: [('还','3','huán'), ('终',None,None), ('谷歌','name','gǔ gē')]
     """
     result = []
     pattern = re.compile(ur'[\u4e00-\ufaff]|[^\u4e00-\ufaff]+')
@@ -117,13 +128,23 @@ def format_text_per_hsk(utf8_text):
     result_text = ''
 
     for item in hsk_breakdown:
-        #print ('%s - hsk%s - %s' % (item[0], item[1], item[2]))
         result_text += html_format_per_hsk(item)
     return result_text
 
 
+def format_text_per_breakdown(hsk_breakdown):
+    result_text = ''
+    for item in hsk_breakdown:
+        result_text += html_format_per_hsk(item)
+    return result_text
+
+
+def get_hsk_breakdown():
+    global hsk_breakdown
+    return hsk_breakdown
+
 #TODO(jk): I am lazy here. Should package the whole class into an Object.
-def jsonify_hsk_statistics():
+def hsk_statistics():
     """Return JSON object that captures the statistics of HSK words in text.
 
     To return meaningful result, this function should be called after
@@ -134,10 +155,11 @@ def jsonify_hsk_statistics():
           computed. This is a list of tuples (word, hsk_level, hanyu_pinyin).
 
     Returns:
-        A JSON object capturing number of words found in text per HSK level.
+        #A JSON object capturing number of words found in text per HSK level.
+        A list of 2-element array: each 2-element array [HSK-x, count of words]
     """
     if hsk_breakdown is None or not hsk_breakdown:
-        return json.dumps([])
+        return []
 
     statistics_dict = {}
     for item in hsk_breakdown:
@@ -149,10 +171,20 @@ def jsonify_hsk_statistics():
     #update the numeric HSK level to be more descriptive (eg. '1' -> 'HSK-1')
     mapping = ({'1':'HSK-1', '2':'HSK-2', '3':'HSK-3', '4':'HSK-4', '5':'HSK-5',
         '6':'HSK-6'})
-    new_list = [ [mapping.get(a,'Non-HSK'), b] for a,b in statistics_list ]
-    return json.dumps(new_list)
+    return [ [mapping.get(a,'Non-HSK'), b] for a,b in statistics_list ]
 
 
+def get_text_last_hours(number_of_hours):
+    last_x_hr = timedelta(hours=number_of_hours)
+    timestamp_xhrs_ago = datetime.now() - last_x_hr
+    query = HskText.query(HskText.date >= timestamp_xhrs_ago)
+    return query.fetch(30)
+
+
+def get_text_by_id(id):
+    return HskText.get_by_id(id)
+
+    
 ##############################################################################
 ## The following sections are functions to process word frequency
 ##############################################################################
@@ -173,7 +205,7 @@ def word_processing(text):
         [('I', 1), ('have', 3), ('dream', 2)]
     """
     word_frequency = {}
-    stop_words = stopwords.words('english')
+    stop_words = config.ENGLISH_STOPWORDS
 
     # Step1. extract all CJK words first
     pattern = re.compile(ur'[\u4e00-\ufaff]')
@@ -185,17 +217,16 @@ def word_processing(text):
 
     # Step2. continue to analyse the roman words
     #re.split('\W+', text) doesn't work for unicode text (eg. Vietnamese)
-    words = re.split('[ .,/?:;!"&*()\[\]\-]', roman_only_text)
+    words = re.split('[ .,/?:;!"&*()\[\]\-]+', roman_only_text)
     words += all_cjk
     for word in words:
+        if word == '': continue
         if word not in word_frequency:
             word_frequency[word] = 1
         else:
             word_frequency[word] += 1
     sorted_words = sorted(word_frequency.items(),key=itemgetter(1),
         reverse=True)
-
-    print sorted_words
 
     #remove the English stop words
     iterator = sorted_words[:]
@@ -209,6 +240,37 @@ def word_processing(text):
                     break
 
     return sorted_words
+
+
+def count_words(text):
+    """Processes input text to count number of words.
+
+    English stop words are counted in result.
+
+    Args:
+        text: the text must be in utf-8 encode. It may contain both Roman 
+            characters and Chinese, Japanese, Korean characters. Example:
+            'I have a dream have have a dream.'
+
+    Returns:
+        An integer indicating the number of words in text.
+    """
+    # Step1. extract all CJK words first
+    pattern = re.compile(ur'[\u4e00-\ufaff]')
+    all_cjk = pattern.findall(text)
+    roman_only_text = pattern.sub('', text)
+
+    pattern = re.compile('\r+\n+')
+    roman_only_text = pattern.sub('. ', roman_only_text)
+    logging.info('roman_only_text: %s' % roman_only_text)
+
+    words = re.split('[ .,/?:;!"&*()\[\]\-]+', roman_only_text)
+    logging.info('words - before cjk: %s' % words)
+    words += all_cjk
+    words = [v for v in words if v != '']
+    logging.info('words - after cjk: %s' % words)
+
+    return len(words)
 
 
 def convert_data_to_html_table(word_frequency, id_name, class_name):

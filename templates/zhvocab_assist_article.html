@@ -1,0 +1,68 @@
+{% extends "master_layout.html" %}
+{% block content %}
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+      <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+       integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+       crossorigin="anonymous"></script>
+      <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+      
+      <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+       <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip(); 
+        });
+      </script> 
+
+      <script src="https://d3js.org/d3.v3.min.js"></script>
+
+  <h2>Chinese vocabulary assist</h2>
+  
+  <p>This is a tool to aid reading Chinese by highlighting characters / words learnt in HSK. </p>
+  <p>Let <a href="{{ url_for('contactme') }}">me</a> know if you want to suggest features.</p>
+ 
+  <br>
+        
+      <div id="result">
+          <div class="text_highlight_display">
+              {% if hsk_format %}
+              <p>
+                <ul class="list-inline">
+                  <li><span class={{hsk_format['1']}}>HSK 1</span></li>
+                  <li><span class={{hsk_format['2']}}>HSK 2</span></li>
+                  <li><span class={{hsk_format['3']}}>HSK 3</span></li>
+                  <li><span class={{hsk_format['4']}}>HSK 4</span></li>
+                  <li><span class={{hsk_format['5']}}>HSK 5</span></li>
+                  <li><span class={{hsk_format['6']}}>HSK 6</span></li>
+                  <li><span class={{hsk_format['name']}}>Name</span></li>
+                  <li><span class={{hsk_format['cdict']}}>CDict</span></li>
+                </ul>
+              </p>
+              {% endif %}
+
+              {% if processed_text %}
+                <h3>Highlighted text</h3>
+                <p>{{ processed_text|safe }}</p>
+              {% endif %}
+
+              <p>&nbsp;</p>
+              <a href="{{ url_for('zhvocab_assist') }}"><button class="btn btn-success" id="id_analyze_btn">&nbsp;&nbsp;Back&nbsp;&nbsp;</button></a>
+
+              {% if result_json %}
+                <h3>Statistics</h3>
+                <table id="hsk_stats_table" class="display" width="100%"></table>
+
+                <svg id="visualisation" width="400" height="400"></svg>
+
+                <script type="text/javascript">
+                  var dataSet = {{ result_json|safe }};
+                  $(document).ready(loadHSKTable("hsk_stats_table", dataSet));
+
+                  setupBarChart( convertDictToD3Format(dataSet) );
+                </script>
+              {% endif %}
+          </div>
+
+      </div>
+
+{% endblock %}

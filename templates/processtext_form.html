@@ -10,7 +10,7 @@
   <h2>Word frequency analysis</h2>
   
   <p>This is an analysis tool for measuring word frequency of your input paragraph. The tool works with both Roman text and Chinese, Korean, Japanese. </p>
-  <p>Let <a href='mailto:jingkee@gmail.com'>me</a> know if you want to suggest other languages.</p>
+  <p>Let <a href="{{ url_for('contactme') }}">me</a> know if you want to suggest other languages.</p>
   
   <form  action="" method="post" role="form">
     {{ form.csrf }}
@@ -29,11 +29,20 @@
             {% if not error %}
                 <div class="alert alert-info">Analysis result:</div>
                 <div>
-                  <strong>{{ message[1] }}</strong>
+                  <i>{{ message[1] }}</i>
                 </div>
+                <p>&nbsp;</p>
+                {% if result_statistic: %}
+                  <p>
+                  <strong> Total:
+                  <span class="btn btn-primary"> {{ result_statistic['characters'] }} characters</span>
+                  &nbsp;
+                  <span class="btn btn-info"> {{ result_statistic['words'] }} words</span>
+                  </p>
+                {% endif %}
 
-                {% if result_table %}
-                   {{ result_table|safe }}
+                {% if result_table: %}
+                  {{ result_table|safe }}
                 {% endif %}
             {% endif %}
  

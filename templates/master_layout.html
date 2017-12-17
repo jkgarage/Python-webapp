@@ -4,30 +4,37 @@
     <title>JK Garage home</title>
 
     <meta charset="UTF-8">
-    <link rel="stylesheet" media="screen" href ="static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="static/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-theme.min.css') }}">
     <meta name="viewport" content = "width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href ="static/css/mycustom.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mycustom.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
   </head>
   <body>
    
     <header>
-        <!-- <h1 class="logo">JK Garage</h1> -->
         <nav class="navbar navbar-default">
           <div class="container-fluid">
             <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#masterNavbar">
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>                        
+              </button>
               <a class="brandname" href="#">JK Garage</a>
             </div>
 
-           <ul class="nav navbar-nav">
-            <li><a href="{{ url_for('processtext') }}">Paragraph analysis</a></li>
-            <li><a href="{{ url_for('hskaid') }}">HSK aid</a></li>
-            <li><a href="{{ url_for('contactme') }}">Contact me</a></li>
-            <li><a href="{{ url_for('upload') }}">Upload photo</a></li>
-            <li><a href="{{ url_for('platecheck') }}">Check Car Plate</a></li>
-           </ul>
+            <div class="collapse navbar-collapse" id="masterNavbar">
+              <ul class="nav navbar-nav">
+                <li><a href="{{ url_for('processtext') }}">Paragraph analysis</a></li>
+                <li><a href="{{ url_for('zhvocab_assist') }}">Chinese vocabulary assist</a></li>
+                <li><a href="{{ url_for('upload') }}">Upload photo</a></li>
+                <li><a href="{{ url_for('platecheck') }}">Check Car Plate</a></li>
+                <li><a href="{{ url_for('contactme') }}">Contact me</a></li>
+              </ul>
+            </div>
           </div>
         </nav>
     </header>

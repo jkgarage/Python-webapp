@@ -74,7 +74,7 @@ div.jumbo {
 }
 
 .text_highlight_display .hsk3 {
-  background-color: #ffccff;
+  background-color: #fca1fc;
 }
 
 .text_highlight_display .hsk4 {
@@ -87,6 +87,15 @@ div.jumbo {
 
 .text_highlight_display .hsk6 {
   background-color: #d8d8d8;
+}
+
+.text_highlight_display .zh-name {
+  background-color: #e0ebfc;
+  font-style: italic;
+}
+
+.text_highlight_display .zh-cdict {
+  background-color: #fcf4fa;
 }
 
 .text_highlight_display p {

@@ -5,15 +5,15 @@
        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
        crossorigin="anonymous"></script>
       <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-
+      
       <script src="static/js/bootstrap.min.js"></script>
       <script src="static/js/app.js"></script>
-      <script>
+       <script>
         $(document).ready(function(){
             $('[data-toggle="tooltip"]').tooltip(); 
         });
-      </script>
- 
+      </script> 
+
       <script src="https://d3js.org/d3.v3.min.js"></script>
   <style>
   body {
@@ -32,7 +32,7 @@
     {{ form.csrf }}
     <div class="form-group">
       <label for="name">Paragraph:</label>
-      <textarea class="form-control" id="id_paragraph" name="paragraph" placeholder="Enter your paragraph.." rows="5"></textarea>
+      <textarea class="form-control" id="id_paragraph" name="paragraph" placeholder="Enter your paragraph.." rows="5" maxlength="16000"></textarea>
     </div>
     <button type="submit" class="btn btn-success" id="id_analyze_btn">Analyze</button>
   </form>
@@ -44,11 +44,6 @@
             {% for message in messages %}
                 {% if not error %}
                     <div class="alert alert-info">Analysis result:</div>
-                    <div>
-                      <h3>Original text</h3>
-                      <strong>{{ message[1] }}</strong>
-                    </div>
-
 
                     <div class="text_highlight_display">
                         {% if hsk_format %}
@@ -60,6 +55,7 @@
                             <li><span class={{hsk_format['4']}}>HSK 4</span></li>
                             <li><span class={{hsk_format['5']}}>HSK 5</span></li>
                             <li><span class={{hsk_format['6']}}>HSK 6</span></li>
+                            <li><span class={{hsk_format['name']}}>Name</span></li>
                           </ul>
                         </p>
                         {% endif %}
